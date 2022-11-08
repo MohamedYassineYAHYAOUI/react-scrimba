@@ -1,0 +1,70 @@
+
+.body{
+  font-family: "Karla", sans-serif;
+  margin: 0;
+}
+
+
+.navBar{
+  background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%); 
+  display: flex;
+  height: 65px;;
+  align-items: center;
+  color: white;
+  /* padding: 0 30px 0px 10px ; */
+  padding: 20px;
+}
+
+.navBar--logo{
+  height: 100%;
+  margin-right: 7px;
+}
+
+.navBar--title{
+  margin-right: auto;
+  font-style: normal;
+  font-size: 1.25rem;
+  letter-spacing: -0.1em;
+}
+
+@media screen and (max-width: 400px){
+.navBar--description{
+    display: none;
+  }
+}
+
+.navBar--description{
+  font-family: Inter;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.ImageForm{
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  padding: 0 17px;
+  /* width: 50%; */
+  margin: 2.25rem;
+  justify-content: center;
+}
+
+.ImageForm--text_input_container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  
+  
+}
+
+.ImageForm--TextInput{
+  margin: 10px auto;
+    width: 300px;
+  /* width: 100%; */
+}
+
+.ImageForm--submitButton{
+  width: 100%;
+  max-width: 1000px;
+}

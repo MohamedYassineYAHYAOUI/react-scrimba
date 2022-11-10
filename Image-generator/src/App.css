@@ -71,4 +71,11 @@
 .formContent{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+.formContent--generatedImage{
+  width: 50%;
+  border-radius: 2px;
+  align-self: center;
 }

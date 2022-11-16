@@ -1,34 +1,82 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useState } from 'react'
+import './App.css'
+import Die from './components/Die'
+import {nanoid} from "nanoid"
+import { useEffect } from 'react';
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
+
+
+
+export default function App() {
+  const diceLength = 10;
+  const [dice, setDice] = useState(allNewDice(diceLength))
+  const [gameWon, setGameWon] = useState(false)
+  const { width, height } = useWindowSize()
+
+  useEffect(() =>{
+    setGameWon(gameWon => {
+      const allSameValue = dice[0].value
+      return dice.every(d => d.selected) && dice.every(d => d.value === allSameValue)
+    })
+
+  }, [dice])
+
+  function allNewDice(diceNumber){
+    const newDiceValues= []
+    for (let index = 0; index < diceNumber; index++) {
+      newDiceValues.push(
+        { 
+          id : nanoid(),
+          value : Math.floor(Math.random() * 6) + 1, 
+          selected : false
+        }
+      )
+    }
+    return newDiceValues;
+  }
+  
+  function rerollDice(){
+    const newValues = allNewDice(diceLength)
+    setDice(dice => dice.map((d,index) => d.selected ? d : newValues[index] ))
+  }
+  
+  function resetDice(){
+    setDice(allNewDice(diceLength))
+  }
+
+  function selectDice(dieId){
+    setDice(dice => dice.map(d => d.id === dieId ? {...d , selected : !d.selected }: d))
+  }
+
+  const diceElems = dice.map(d => <Die key={d.id} {...d} selectDice={() => selectDice(d.id)}></Die>)
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main>
+      {gameWon ?  
+      
+      <Confetti
+        width={width}
+        height={height}
+      />
+      
+      : ""}
+      <div className="outerContainer">
+        <div className="innerGameContainer">
+          
+          <h1 className="title">Tenzies</h1>
+          <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+          <div className="diceContainer">
+              {diceElems}
+          </div>
+          {gameWon ?
+            (<button className='dieRoll' onClick={resetDice}>New Game</button>):
+            (<button className='dieRoll' onClick={rerollDice}>ROLL</button>)
+          } 
+          
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    </main>
   )
-}
-
-export default App
+};

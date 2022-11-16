@@ -9,25 +9,39 @@ body{
     font-family: Inter, sans-serif;
 }
 
+p{
+    margin-block: 0
+}
+
 .navContainer{
     position: relative;
     left: 0;
     top: 0;
     width: 100%;
     z-index: 10;
+    color :  #21222A;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 .navBar{
-    background-color: #21222A;
+    background-color: #FFFFFF;
     padding: 30px 25px;
     align-items: center;
-
+    display: flex;
     width: 100%;
     /* max-width: 1710px; */
     padding-left: 30px;
     padding-right: 30px;
     /* max-width: 1296px; */
 }
+
+.dark{
+    background-color: #21222A;
+}
+.mainDark{
+    color: #282D35;
+}
+
 .navBar > img{
     margin-right:7px ;
 } 
@@ -39,15 +53,72 @@ body{
     /* font-size: 22px; */
 
 }
-.navBar > span{
+/* .navBar > span{
     color: #DEEBF8;
     font-weight: 600;
     font-size: 16px;
+} */
+
+.toggler{
+    display : flex;
+    align-items: center;
 }
 
-.main{    
-    background-color: #282D35;
+
+nav.dark .toggler--light{
     color: #FFFFFF;
+    font-weight: lighter;
+}
+nav.dark .toggler--dark {
+    color: #FFFFFF;
+    font-weight:bold;
+}
+
+nav .toggler--dark{
+    color: #282D35;
+    font-weight: lighter;
+}
+nav .toggler--light{
+    color: #282D35;
+    font-weight: bold;
+}
+
+.toggler--slider{
+    background-color: #282D35;
+    width: 35px;
+    height: 18px;
+    border-radius: 2rem;
+    margin-inline: 7px;
+    cursor: pointer;
+    border: 1px solid;
+    /* box-sizing: content-box; */
+    display: flex;
+    justify-content: flex-start;
+    padding-inline: 1px;
+}
+
+nav.dark .toggler--slider{
+    background-color: #FFFFFF;
+    justify-content: flex-end;
+}
+
+
+nav.dark .toggler--cercle{
+    background-color: #282D35;
+}
+
+.toggler--cercle{
+    background-color: #FFFFFF;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    align-self: center;
+}
+
+
+
+.main{    
+    color: #282D35;
     background-image: url(assets/react-icon-large.png);
     background-repeat: no-repeat;
     background-position: right;
@@ -61,6 +132,11 @@ body{
 
 
 }
+main.mainDark {
+    color: #FFFFFF;
+    background-color: #282D35 ;
+}
+
 .main--list{
     font-weight: 400;
     font-size: 16px;
